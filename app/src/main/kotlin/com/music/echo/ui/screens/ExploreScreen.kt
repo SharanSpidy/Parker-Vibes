@@ -125,6 +125,12 @@ fun ExploreScreen(
         ),
       )
 
+      ParkerVibesBrandBanner(
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        eyebrow = "DISCOVER YOUR NEXT UNIVERSE",
+        compact = true,
+      )
+
       if (isChartsLoading || chartsPage == null || explorePage == null) {
         ShimmerHost {
           TextPlaceholder(

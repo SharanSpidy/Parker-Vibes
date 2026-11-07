@@ -332,6 +332,13 @@ fun LibraryMixScreen(
           state = lazyListState,
           contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues(),
         ) {
+          item(key = "parkervibes_library_brand", contentType = CONTENT_TYPE_HEADER) {
+            echo.music.iad1tya.ui.screens.ParkerVibesBrandBanner(
+              modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+              eyebrow = "YOUR COLLECTION. YOUR UNIVERSE.",
+              compact = true,
+            )
+          }
           item(
             key = "filter",
             contentType = CONTENT_TYPE_HEADER,
@@ -771,6 +778,17 @@ fun LibraryMixScreen(
             ),
           contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues(),
         ) {
+          item(
+            key = "parkervibes_library_brand",
+            span = { GridItemSpan(maxLineSpan) },
+            contentType = CONTENT_TYPE_HEADER,
+          ) {
+            echo.music.iad1tya.ui.screens.ParkerVibesBrandBanner(
+              modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+              eyebrow = "YOUR COLLECTION. YOUR UNIVERSE.",
+              compact = true,
+            )
+          }
           item(
             key = "filter",
             span = { GridItemSpan(maxLineSpan) },

@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,6 +38,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,6 +70,7 @@ fun AppIconSettingsScreen(
   val (appIconType, onAppIconTypeChange) =
     rememberEnumPreference(AppIconTypeKey, defaultValue = AppIconType.DEFAULT)
   val coroutineScope = rememberCoroutineScope()
+  var pendingIconType by remember { mutableStateOf(appIconType) }
 
   fun handleIconChange(iconType: AppIconType) {
     if (appIconType == iconType) return
@@ -165,7 +170,27 @@ fun AppIconSettingsScreen(
           "Millie Bobby Brown",
           "Millie Bobby Brown on community demand",
           R.mipmap.ic_launcher_millie
-        )
+        ),
+        AppIconOption(AppIconType.CAPTAIN_AMERICA, "Captain America", "Marvel collection", R.mipmap.captain_america_icon),
+        AppIconOption(AppIconType.ARC_REACTOR, "Arc Reactor", "Marvel collection", R.mipmap.arc_reactor_icon),
+        AppIconOption(AppIconType.STARK_TECH, "Stark Tech", "Marvel collection", R.mipmap.stark_tech_icon),
+        AppIconOption(AppIconType.HULK, "Hulk", "Marvel collection", R.mipmap.hulk_icon),
+        AppIconOption(AppIconType.BLACK_WIDOW, "Black Widow", "Marvel collection", R.mipmap.black_widow_icon),
+        AppIconOption(AppIconType.HAWKEYE, "Hawkeye", "Marvel collection", R.mipmap.hawkeye_icon),
+        AppIconOption(AppIconType.SCARLET_WITCH, "Scarlet Witch", "Marvel collection", R.mipmap.scarlet_witch_icon),
+        AppIconOption(AppIconType.LOKI, "Loki", "Marvel collection", R.mipmap.loki_icon),
+        AppIconOption(AppIconType.SPIDER_MAN, "Spider-Man", "Marvel collection", R.mipmap.spider_man_icon),
+        AppIconOption(AppIconType.BLACK_PANTHER, "Black Panther", "Marvel collection", R.mipmap.black_panther_icon),
+        AppIconOption(AppIconType.WEB_SLINGER, "Web Slinger", "Marvel collection", R.mipmap.web_slinger_icon),
+        AppIconOption(AppIconType.GUARDIANS, "Guardians", "Marvel collection", R.mipmap.guardians_icon),
+        AppIconOption(AppIconType.CAPTAIN_MARVEL, "Captain Marvel", "Marvel collection", R.mipmap.captain_marvel_icon),
+        AppIconOption(AppIconType.ANT_MAN, "Ant-Man", "Marvel collection", R.mipmap.ant_man_icon),
+        AppIconOption(AppIconType.WINTER_SOLDIER, "Winter Soldier", "Marvel collection", R.mipmap.winter_soldier_icon),
+        AppIconOption(AppIconType.SHIELD, "S.H.I.E.L.D.", "Marvel collection", R.mipmap.shield_icon),
+        AppIconOption(AppIconType.X_MEN, "X-Men", "Marvel collection", R.mipmap.x_men_icon),
+        AppIconOption(AppIconType.PUNISHER, "Punisher", "Marvel collection", R.mipmap.punisher_icon),
+        AppIconOption(AppIconType.DEADPOOL, "Deadpool", "Marvel collection", R.mipmap.deadpool_icon),
+        AppIconOption(AppIconType.AVENGERS, "Avengers", "Marvel collection", R.mipmap.avengers_icon),
       ).sortedBy { it.title.lowercase() }
 
     Column(
@@ -190,50 +215,63 @@ fun AppIconSettingsScreen(
       )
 
       Column(modifier = Modifier.fillMaxWidth()) {
-        icons.forEachIndexed { index, option ->
-          val shape =
-            when {
-              icons.size == 1 -> RoundedCornerShape(24.dp)
-              index == 0 ->
-                RoundedCornerShape(
-                  topStart = 24.dp,
-                  topEnd = 24.dp,
-                  bottomStart = 4.dp,
-                  bottomEnd = 4.dp
-                )
-              index == icons.size - 1 ->
-                RoundedCornerShape(
-                  topStart = 4.dp,
-                  topEnd = 4.dp,
-                  bottomStart = 24.dp,
-                  bottomEnd = 24.dp
-                )
-              else -> RoundedCornerShape(4.dp)
-            }
-
-          Card(
+        Text(
+          text = "MARVEL COLLECTION",
+          style = MaterialTheme.typography.labelLarge,
+          color = MaterialTheme.colorScheme.primary,
+          fontWeight = FontWeight.ExtraBold,
+          modifier = Modifier.padding(start = 4.dp, top = 12.dp, bottom = 10.dp)
+        )
+        icons.chunked(3).forEach { rowOptions ->
+          Row(
             modifier = Modifier.fillMaxWidth(),
-            shape = shape,
-            colors =
-              CardDefaults.cardColors(
-                containerColor =
-                  if (appIconType == option.type)
-                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                  else MaterialTheme.colorScheme.surfaceContainerHigh
-              ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(10.dp)
           ) {
-            AppIconRow(
-              option = option,
-              isSelected = (appIconType == option.type),
-              onClick = { handleIconChange(option.type) }
-            )
-          }
-
-          if (index < icons.size - 1) {
-            Spacer(modifier = Modifier.height(2.dp))
+            rowOptions.forEach { option ->
+              val selected = pendingIconType == option.type
+              Card(
+                modifier = Modifier.weight(1f).padding(bottom = 10.dp).clickable { pendingIconType = option.type },
+                shape = RoundedCornerShape(18.dp),
+                border = if (selected) androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
+                colors = CardDefaults.cardColors(
+                  containerColor = if (selected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f) else MaterialTheme.colorScheme.surfaceContainerHigh
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = if (selected) 3.dp else 0.dp)
+              ) {
+                Column(
+                  modifier = Modifier.fillMaxWidth().padding(horizontal = 6.dp, vertical = 12.dp),
+                  horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                  Image(
+                    painter = painterResource(option.iconRes),
+                    contentDescription = option.title,
+                    modifier = Modifier.size(62.dp).clip(RoundedCornerShape(16.dp))
+                  )
+                  Spacer(Modifier.height(8.dp))
+                  Text(
+                    text = option.title,
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                    maxLines = 1,
+                    color = MaterialTheme.colorScheme.onSurface
+                  )
+                  if (selected) {
+                    Text("SELECTED", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                  }
+                }
+              }
+            }
+            repeat(3 - rowOptions.size) { Spacer(Modifier.weight(1f)) }
           }
         }
+      }
+
+      Button(
+        onClick = { handleIconChange(pendingIconType) },
+        enabled = pendingIconType != appIconType,
+        modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 12.dp)
+      ) {
+        Text(if (pendingIconType == AppIconType.DEFAULT) "Restore default icon" else "Apply selected icon")
       }
 
       Spacer(

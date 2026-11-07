@@ -19,28 +19,53 @@ enum class AppIconType(val value: Int) {
   CRAFT(16),
   SADIE(17),
   NEON_GLASS(18),
-  MILLIE_BOBBY_BROWN(19)
+  MILLIE_BOBBY_BROWN(19),
+  CAPTAIN_AMERICA(20), ARC_REACTOR(21), STARK_TECH(22), HULK(23),
+  BLACK_WIDOW(24), HAWKEYE(25), SCARLET_WITCH(26), LOKI(27),
+  SPIDER_MAN(28), BLACK_PANTHER(29), WEB_SLINGER(30), GUARDIANS(31),
+  CAPTAIN_MARVEL(32), ANT_MAN(33), WINTER_SOLDIER(34), SHIELD(35),
+  X_MEN(36), PUNISHER(37), DEADPOOL(38), AVENGERS(39)
 }
 
 object IconUtils {
   fun setIcon(context: Context, iconType: AppIconType) {
     val pm = context.packageManager
 
-    val dynamic = ComponentName(context, "echo.music.iad1tya.MainActivityAlias")
-    val legacy = ComponentName(context, "echo.music.iad1tya.MainActivityLegacy")
-    val static = ComponentName(context, "echo.music.iad1tya.MainActivityStatic")
-    val cat = ComponentName(context, "echo.music.iad1tya.MainActivityCat")
-    val crazyBlue = ComponentName(context, "echo.music.iad1tya.MainActivityCrazyBlue")
-    val pookie = ComponentName(context, "echo.music.iad1tya.MainActivityPookie")
-    val sky = ComponentName(context, "echo.music.iad1tya.MainActivitySky")
-    val echoCat = ComponentName(context, "echo.music.iad1tya.MainActivityEchoCat")
-    val billieEilish = ComponentName(context, "echo.music.iad1tya.MainActivityBillieEilish")
-    val sabrina = ComponentName(context, "echo.music.iad1tya.MainActivitySabrina")
-    val sabrina2 = ComponentName(context, "echo.music.iad1tya.MainActivitySabrina2")
-    val craft = ComponentName(context, "echo.music.iad1tya.MainActivityCraft")
-    val sadie = ComponentName(context, "echo.music.iad1tya.MainActivitySadie")
-    val neonGlass = ComponentName(context, "echo.music.iad1tya.MainActivityNeonGlass")
-    val millie = ComponentName(context, "echo.music.iad1tya.MainActivityMillie")
+    val dynamic = ComponentName(context, "${context.packageName}.MainActivityAlias")
+    val legacy = ComponentName(context, "${context.packageName}.MainActivityLegacy")
+    val static = ComponentName(context, "${context.packageName}.MainActivityStatic")
+    val cat = ComponentName(context, "${context.packageName}.MainActivityCat")
+    val crazyBlue = ComponentName(context, "${context.packageName}.MainActivityCrazyBlue")
+    val pookie = ComponentName(context, "${context.packageName}.MainActivityPookie")
+    val sky = ComponentName(context, "${context.packageName}.MainActivitySky")
+    val echoCat = ComponentName(context, "${context.packageName}.MainActivityEchoCat")
+    val billieEilish = ComponentName(context, "${context.packageName}.MainActivityBillieEilish")
+    val sabrina = ComponentName(context, "${context.packageName}.MainActivitySabrina")
+    val sabrina2 = ComponentName(context, "${context.packageName}.MainActivitySabrina2")
+    val craft = ComponentName(context, "${context.packageName}.MainActivityCraft")
+    val sadie = ComponentName(context, "${context.packageName}.MainActivitySadie")
+    val neonGlass = ComponentName(context, "${context.packageName}.MainActivityNeonGlass")
+    val millie = ComponentName(context, "${context.packageName}.MainActivityMillie")
+    val captainAmerica = ComponentName(context, "${context.packageName}.MainActivityCaptainAmerica")
+    val arcReactor = ComponentName(context, "${context.packageName}.MainActivityArcReactor")
+    val starkTech = ComponentName(context, "${context.packageName}.MainActivityStarkTech")
+    val hulk = ComponentName(context, "${context.packageName}.MainActivityHulk")
+    val blackWidow = ComponentName(context, "${context.packageName}.MainActivityBlackWidow")
+    val hawkeye = ComponentName(context, "${context.packageName}.MainActivityHawkeye")
+    val scarletWitch = ComponentName(context, "${context.packageName}.MainActivityScarletWitch")
+    val loki = ComponentName(context, "${context.packageName}.MainActivityLoki")
+    val spiderMan = ComponentName(context, "${context.packageName}.MainActivitySpiderMan")
+    val blackPanther = ComponentName(context, "${context.packageName}.MainActivityBlackPanther")
+    val webSlinger = ComponentName(context, "${context.packageName}.MainActivityWebSlinger")
+    val guardians = ComponentName(context, "${context.packageName}.MainActivityGuardians")
+    val captainMarvel = ComponentName(context, "${context.packageName}.MainActivityCaptainMarvel")
+    val antMan = ComponentName(context, "${context.packageName}.MainActivityAntMan")
+    val winterSoldier = ComponentName(context, "${context.packageName}.MainActivityWinterSoldier")
+    val shield = ComponentName(context, "${context.packageName}.MainActivityShield")
+    val xMen = ComponentName(context, "${context.packageName}.MainActivityXMen")
+    val punisher = ComponentName(context, "${context.packageName}.MainActivityPunisher")
+    val deadpool = ComponentName(context, "${context.packageName}.MainActivityDeadpool")
+    val avengers = ComponentName(context, "${context.packageName}.MainActivityAvengers")
 
     pm.setComponentEnabledSetting(
       dynamic,
@@ -130,6 +155,126 @@ object IconUtils {
     pm.setComponentEnabledSetting(
       millie,
       if (iconType == AppIconType.MILLIE_BOBBY_BROWN) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      captainAmerica,
+      if (iconType == AppIconType.CAPTAIN_AMERICA) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      arcReactor,
+      if (iconType == AppIconType.ARC_REACTOR) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      starkTech,
+      if (iconType == AppIconType.STARK_TECH) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      hulk,
+      if (iconType == AppIconType.HULK) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      blackWidow,
+      if (iconType == AppIconType.BLACK_WIDOW) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      hawkeye,
+      if (iconType == AppIconType.HAWKEYE) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      scarletWitch,
+      if (iconType == AppIconType.SCARLET_WITCH) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      loki,
+      if (iconType == AppIconType.LOKI) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      spiderMan,
+      if (iconType == AppIconType.SPIDER_MAN) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      blackPanther,
+      if (iconType == AppIconType.BLACK_PANTHER) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      webSlinger,
+      if (iconType == AppIconType.WEB_SLINGER) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      guardians,
+      if (iconType == AppIconType.GUARDIANS) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      captainMarvel,
+      if (iconType == AppIconType.CAPTAIN_MARVEL) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      antMan,
+      if (iconType == AppIconType.ANT_MAN) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      winterSoldier,
+      if (iconType == AppIconType.WINTER_SOLDIER) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      shield,
+      if (iconType == AppIconType.SHIELD) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      xMen,
+      if (iconType == AppIconType.X_MEN) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      punisher,
+      if (iconType == AppIconType.PUNISHER) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      deadpool,
+      if (iconType == AppIconType.DEADPOOL) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+      else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+      PackageManager.DONT_KILL_APP
+    )
+    pm.setComponentEnabledSetting(
+      avengers,
+      if (iconType == AppIconType.AVENGERS) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
       else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
       PackageManager.DONT_KILL_APP
     )
